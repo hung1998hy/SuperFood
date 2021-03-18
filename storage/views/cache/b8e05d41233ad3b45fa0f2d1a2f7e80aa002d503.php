@@ -15,6 +15,10 @@
                 <div style="width: 40%; margin: auto">
                     <form action="/superFood/admin/users/store" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
+                            <label for="userImage">Ảnh mô tả</label>
+                            <input type="file" name="userImage" class="form-control" id="userImage">
+                        </div>
+                        <div class="form-group">
                             <label for="userFirstNameAdd">Tên:</label>
                             <input type="text" name="userFirstNameAdd" class="form-control" id="userFirstNameAdd">
                         </div>

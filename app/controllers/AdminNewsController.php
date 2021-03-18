@@ -31,7 +31,7 @@ class AdminNewsController extends Controller
      */
     public function create(){
         $tags = NewsTags::all();
-        $html = $this->getCategory($parent_id = 0);
+        $html = getCategory($parent_id = 0);
         Blade::render('admin/news/add', compact('html', 'tags'));
     }
     /**
@@ -47,15 +47,25 @@ class AdminNewsController extends Controller
         $author = $_POST['newsAuthorAdd'];
         $category = $_POST['newsCategoryAdd'];
 
-
-        $news = News::create([
-            'title' => $title,
-            'description' => $desc,
-            'content' => $content,
-            'author' => $author,
-            'category_id' => $category
-        ]);
-
+        if (is_uploaded_file($_FILES['images']['tmp_name'])) {
+            $image_src = uploadFile($_FILES['images'], 'news');
+            $news = News::create([
+                'title' => $title,
+                'description' => $desc,
+                'content' => $content,
+                'author' => $author,
+                'category_id' => $category,
+                'images' => $image_src
+            ]);
+        }else{
+            $news = News::create([
+                'title' => $title,
+                'description' => $desc,
+                'content' => $content,
+                'author' => $author,
+                'category_id' => $category
+            ]);
+        }
         if ($news) {
             $tags = $_POST["tags"];
             if (!empty($tags)) {
@@ -68,7 +78,7 @@ class AdminNewsController extends Controller
             }
             header('Location:/superFood/admin/news/');
         } else {
-            echo "<script>alert('Thêm tin thất bại'); window.location= '/superFood/admin/news/';</script>";
+            echo "<script>alert('Thêm tin thất bại'); window.location= '/superFood/admin/news';</script>";
         }
     }
     /**
@@ -96,13 +106,26 @@ class AdminNewsController extends Controller
         $category = $_POST['newsCategoryUpdate'];
 
         $found_news = News::find($id['id']);
-        $news = $found_news->update([
-            'title' => $title,
-            'description' => $desc,
-            'content' => $content,
-            'author' => $author,
-            'category_id' => $category
-        ]);
+        if (is_uploaded_file($_FILES['images']['tmp_name'])){
+            $image_src = uploadFile($_FILES['images'], 'news');
+            $news = $found_news->update([
+                'title' => $title,
+                'description' => $desc,
+                'content' => $content,
+                'author' => $author,
+                'category_id' => $category,
+                'images' => $image_src
+            ]);
+        } else{
+            $news = $found_news->update([
+                'title' => $title,
+                'description' => $desc,
+                'content' => $content,
+                'author' => $author,
+                'category_id' => $category,
+            ]);
+        }
+
 
         if ($news) {
             //  Gắn tags

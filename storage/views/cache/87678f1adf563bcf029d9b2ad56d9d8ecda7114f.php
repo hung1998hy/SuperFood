@@ -1,6 +1,6 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" href="/superFood/admin/dashboard/">
-        Xin chào <?php echo $_SESSION['user']['firstname'] ?>
+        Xin chào <?php echo App\Users::find($_SESSION['user']['id'])->firstname ?>
     </a>
     <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
     </button>
@@ -19,11 +19,11 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false"><img style="border-radius: 50%" src="
-                <?php if($_SESSION['user']['images']): ?>
-                    <?php echo e($_SESSION['user']['images']); ?>
+                <?php if(App\Users::find($_SESSION['user']['id'])->images): ?>
+                        /<?php echo e($_ENV['APP_NAME']); ?>/uploads/<?php echo e(App\Users::find($_SESSION['user']['id'])->images); ?>
 
                 <?php else: ?>
-                    <?php echo e($_ENV['APP_NAME'].'backend/assets/images/userImages/defaultImage.png'); ?>
+                    /<?php echo e($_ENV['APP_NAME'].'/backend/assets/images/userImages/defaultImage.png'); ?>
 
                 <?php endif; ?>
                 ?>" alt="" width="30" height="30"></a>

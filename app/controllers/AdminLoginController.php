@@ -39,10 +39,7 @@ class AdminLoginController extends Controller
                 $flag = 1;
                 $_SESSION['user'] = [
                     'id' => $user['id'],
-                    'email' => $user['email'],
-                    'firstname' => $user['firstname'],
-                    'lastname' => $user['lastname'],
-                    'images' => $user['images']
+                    'email' => $user['email']
                 ];
                 if (isset($_POST['remember_me'])) {
                     setcookie('email', $email, time() + (3600 * 24 * 30));
@@ -52,7 +49,7 @@ class AdminLoginController extends Controller
             }
         }
         if ($flag == 0) {
-            echo "<script>alert('Sai tài khoản hoặc mật khẩu!'); window.location= '/superFood/admin/login/';</script>";
+            echo "<script>alert('Sai tài khoản hoặc mật khẩu!'); window.location= '/superFood/admin/login';</script>";
         }
     }
     /**

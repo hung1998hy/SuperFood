@@ -1,3 +1,8 @@
+<?php if(!checkPer($_SESSION['user']['id'], 'role_view')): ?>
+    <?php
+    header("Location: /superFood/admin/dashboard/");
+    ?>
+<?php endif; ?>
 
 <?php $__env->startSection('title'); ?><?php echo e('News Categories'); ?><?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -11,8 +16,10 @@
                         <li class="breadcrumb-item"><a href="/superFood/admin/dashboard/">Dashboard</a></li>
                         <li class="breadcrumb-item active">Quản lý phân quyền</li>
                     </ol>
-                    <a href="/superFood/admin/roles/create" class="btn btn-primary addBtn">Thêm quyền
-                    </a>
+                    <?php if(checkPer($_SESSION['user']['id'], 'role_add')): ?>
+                        <a href="/superFood/admin/roles/create" class="btn btn-primary addBtn">Thêm quyền
+                        </a>
+                    <?php endif; ?>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table mr-1"></i>
@@ -34,8 +41,12 @@
                                         <td><?php echo e($role->id); ?></td>
                                         <td><?php echo e($role->name); ?></td>
                                         <td>
+                                            <?php if(checkPer($_SESSION['user']['id'], 'role_edit')): ?>
                                             <a class="btn btn-primary" href="/superFood/admin/roles/edit/<?php echo e($role->id); ?>">Sửa</a>
-                                            <a class="btn btn-danger" href="/superFood/admin/roles/delete/<?php echo e($role->id); ?>">Xóa</a>
+                                            <?php endif; ?>
+                                            <?php if(checkPer($_SESSION['user']['id'], 'role_delete')): ?>
+                                                <a class="btn btn-danger" href="/superFood/admin/roles/delete/<?php echo e($role->id); ?>">Xóa</a>
+                                                <?php endif; ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -4,6 +4,7 @@ namespace App\controllers;
 
 use App\Blade\Blade;
 use App\database\Database;
+use App\Users;
 
 new Database;
 
@@ -38,7 +39,25 @@ class AdminResetPasswordController extends Controller
      */
     public function store()
     {
+        $email = $_POST['emailReset'];
 
+        $newPass = test_input($_POST['newPassword']);
+        $confirm = test_input($_POST['confirmPassword']);
+        $ok = 1;
+        if($newPass !== $confirm){
+            $ok = 0;
+        }
+        if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[0-9a-zA-Z\d]{8,}$/", $newPass)){
+            $ok = 0;
+        }
+        if ($ok === 1){
+            Users::where('email', $email)->update([
+                'password' => md5($newPass)
+            ]);
+            header('Location: /superFood/admin/login');
+        }else{
+            echo "<script>alert('Không thành công!'); window.location='/superFood/admin/resetPassword/create?email=$email'  ; </script>";
+        }
     }
 
     /**

@@ -1,3 +1,8 @@
+<?php if(!checkPer($_SESSION['user']['id'], 'post_view')): ?>
+    <?php
+    header("Location: /superFood/admin/dashboard/");
+    ?>
+<?php endif; ?>
 
 <?php $__env->startSection('title'); ?><?php echo e('News'); ?><?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -11,8 +16,10 @@
                         <li class="breadcrumb-item"><a href="/superFood/admin/dashboard/">Dashboard</a></li>
                         <li class="breadcrumb-item active">Quản lý tin tức</li>
                     </ol>
-                    <a href="/superFood/admin/news/create" class="btn btn-primary addBtn">Thêm tin tức
-                    </a>
+                    <?php if(checkPer($_SESSION['user']['id'], 'post_add')): ?>
+                        <a href="/superFood/admin/news/create" class="btn btn-primary addBtn">Thêm tin tức
+                        </a>
+                    <?php endif; ?>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table mr-1"></i>
@@ -35,7 +42,7 @@
                                     <tbody>
                                     <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $news): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td class="text-center"><img src="" alt="" width="100" height="100"></td>
+                                        <td class="text-center"><img src="../../public/uploads/<?php echo e($news->images); ?>" alt="" width="100" height="100"></td>
                                         <td><?php echo e($news->title); ?></td>
                                         <td><?php echo e($news->description); ?></td>
                                         <td><?php echo e($news->author); ?></td>
@@ -60,8 +67,12 @@
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </td>
                                         <td>
+                                            <?php if(checkPer($_SESSION['user']['id'], 'post_edit')): ?>
                                             <a class="btn btn-primary" href="/superFood/admin/news/edit/<?php echo e($news->id); ?>">Sửa</a>
-                                            <a class="btn btn-danger" href="/superFood/admin/news/delete/<?php echo e($news->id); ?>">Xóa</a>
+                                            <?php endif; ?>
+                                            <?php if(checkPer($_SESSION['user']['id'], 'post_delete')): ?>
+                                                <a class="btn btn-danger" href="/superFood/admin/news/delete/<?php echo e($news->id); ?>">Xóa</a>
+                                            <?php endif; ?>
                                         </td>
 
                                     </tr>

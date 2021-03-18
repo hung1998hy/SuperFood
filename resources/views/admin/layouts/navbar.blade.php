@@ -1,6 +1,6 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" href="/superFood/admin/dashboard/">
-        Xin chào @php echo $_SESSION['user']['firstname'] @endphp
+        Xin chào @php echo App\Users::find($_SESSION['user']['id'])->firstname @endphp
     </a>
     <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
     </button>
@@ -19,10 +19,10 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false"><img style="border-radius: 50%" src="
-                @if ($_SESSION['user']['images'])
-                    {{$_SESSION['user']['images']}}
+                @if (App\Users::find($_SESSION['user']['id'])->images)
+                        /{{$_ENV['APP_NAME']}}/uploads/{{App\Users::find($_SESSION['user']['id'])->images}}
                 @else
-                    {{$_ENV['APP_NAME'].'backend/assets/images/userImages/defaultImage.png'}}
+                    /{{$_ENV['APP_NAME'].'/backend/assets/images/userImages/defaultImage.png'}}
                 @endif
                 ?>" alt="" width="30" height="30"></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">

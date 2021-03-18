@@ -3,5 +3,5 @@
 namespace App\Interfaces;
 
 interface Notification {
-    public function send();
+    public static function send($email, $name, $title, $content);
 }

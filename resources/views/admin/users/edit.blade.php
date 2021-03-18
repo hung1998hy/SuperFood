@@ -15,6 +15,10 @@
                 <div style="width: 40%; margin: auto">
                     <form action="/superFood/admin/users/update/{{$user->id}}" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
+                            <label for="images">Ảnh mô tả</label>
+                            <input type="file" name="userImageUpdate" class="form-control" id="images">
+                        </div>
+                        <div class="form-group">
                             <label for="userFirstNameUpdate">Tên:</label>
                             <input value="{{$user->firstname}}" type="text" name="userFirstNameUpdate" class="form-control" id="userFirstNameUpdate">
                         </div>
@@ -43,12 +47,12 @@
                                 @endforeach
                             </select>
                         </div>
-                        {{--                        <div class="form-group position-relative text-center">--}}
-                        {{--                            <img class="imagesForm" width="100" src="../../../../public/admin/assets/images/userImages/defaultImage.png"/>--}}
-                        {{--                            <label class="formLabel" for="fileToAddUser"><i class="fas fa-pen"></i><input--}}
-                        {{--                                        style="display: none" type="file" id="fileToAddUser"--}}
-                        {{--                                        name="fileToUpload"></label>--}}
-                        {{--                        </div>--}}
+{{--                                                <div class="form-group position-relative text-center">--}}
+{{--                                                    <img class="imagesForm" width="100" src="../../../../public/admin/assets/images/userImages/defaultImage.png"/>--}}
+{{--                                                    <label class="formLabel" for="fileToAddUser"><i class="fas fa-pen"></i><input--}}
+{{--                                                                style="display: none" type="file" id="fileToAddUser"--}}
+{{--                                                                name="fileToUpload"></label>--}}
+{{--                                                </div>--}}
                         <button class="btn btn-primary">Thêm</button>
                     </form>
                 </div>

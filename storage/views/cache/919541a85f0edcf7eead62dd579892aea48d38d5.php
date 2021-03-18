@@ -26,14 +26,15 @@
                                 <h3 class="text-center font-weight-light my-4">Đặt lại mật khẩu</h3>
                             </div>
                             <div class="card-body">
-                                <form action="" method="POST">
+                                <form action="/superFood/admin/resetPassword/store" method="POST">
+                                    <input type="hidden" value="<?php echo e($_GET['email']); ?>" name="emailReset">
                                     <div class="form-group">
                                         <label for="">Mật khẩu mới :</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">
-                            <i class="far fa-lock-alt"></i>
-                          </span>
+                                              <span class="input-group-text" id="basic-addon1">
+                                                <i class="far fa-lock-alt"></i>
+                                              </span>
                                             </div>
                                             <input class="form-control" aria-describedby="basic-addon1"
                                                    type="password" name="newPassword"

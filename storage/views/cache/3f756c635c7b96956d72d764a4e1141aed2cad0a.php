@@ -15,6 +15,10 @@
                 <div style="width: 40%; margin: auto">
                     <form action="/superFood/admin/users/update/<?php echo e($user->id); ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
+                            <label for="images">Ảnh mô tả</label>
+                            <input type="file" name="userImageUpdate" class="form-control" id="images">
+                        </div>
+                        <div class="form-group">
                             <label for="userFirstNameUpdate">Tên:</label>
                             <input value="<?php echo e($user->firstname); ?>" type="text" name="userFirstNameUpdate" class="form-control" id="userFirstNameUpdate">
                         </div>

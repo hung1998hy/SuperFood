@@ -59,13 +59,24 @@ class AdminUserController extends Controller
             $flag = 0;
         }
         if ($flag === 1){
-            $user = Users::create([
+            if (is_uploaded_file($_FILES['userImage']['tmp_name'])){
+                $image_src = uploadFile($_FILES['userImage'], 'users');
+                $user = Users::create([
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'email' => $email,
+                    'password' => md5($password),
+                    'role_id' => $role_id,
+                    'images' => $image_src
+                ]);
+            }else{$user = Users::create([
                 'firstname' => $firstname,
                 'lastname' => $lastname,
                 'email' => $email,
                 'password' => md5($password),
-                'role_id' => $role_id
-            ]);
+                'role_id' => $role_id,
+                ]);
+            }
             if ($user){
                 header('Location: /superFood/admin/users/');
             }else{
@@ -110,12 +121,24 @@ class AdminUserController extends Controller
             $flag = 0;
         }
         if ($flag === 1){
+            $image_src = uploadFile($_FILES['userImageUpdate'], 'users');
             if ($password == ""){
                 $user = Users::find($id['id'])->update([
                     'firstname' => $firstname,
                     'lastname' => $lastname,
                     'email' => $email,
-                    'role_id' => $role_id
+                    'role_id' => $role_id,
+                    'images' => $image_src
+
+                ]);
+            }
+            if (is_uploaded_file($_FILES['userImageUpdate']['tmp_name'])){
+                $user = Users::find($id['id'])->update([
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'email' => $email,
+                    'role_id' => $role_id,
+                    'images' => $image_src
                 ]);
             }
             else{
@@ -124,7 +147,8 @@ class AdminUserController extends Controller
                     'lastname' => $lastname,
                     'email' => $email,
                     'password' => md5($password),
-                    'role_id' => $role_id
+                    'role_id' => $role_id,
+                    'images' => $image_src
                 ]);
             }
             if ($user){

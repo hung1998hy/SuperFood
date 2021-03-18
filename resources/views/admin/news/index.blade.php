@@ -1,3 +1,8 @@
+@if(!checkPer($_SESSION['user']['id'], 'post_view'))
+    <?php
+    header("Location: /superFood/admin/dashboard/");
+    ?>
+@endif
 @extends('admin.layouts.master')
 @section('title'){{'News'}}@endsection
 @section('content')
@@ -11,8 +16,10 @@
                         <li class="breadcrumb-item"><a href="/superFood/admin/dashboard/">Dashboard</a></li>
                         <li class="breadcrumb-item active">Quản lý tin tức</li>
                     </ol>
-                    <a href="/superFood/admin/news/create" class="btn btn-primary addBtn">Thêm tin tức
-                    </a>
+                    @if(checkPer($_SESSION['user']['id'], 'post_add'))
+                        <a href="/superFood/admin/news/create" class="btn btn-primary addBtn">Thêm tin tức
+                        </a>
+                    @endif
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table mr-1"></i>
@@ -35,7 +42,7 @@
                                     <tbody>
                                     @foreach($news as $key => $news)
                                     <tr>
-                                        <td class="text-center"><img src="" alt="" width="100" height="100"></td>
+                                        <td class="text-center"><img src="../../public/uploads/{{$news->images}}" alt="" width="100" height="100"></td>
                                         <td>{{$news->title}}</td>
                                         <td>{{$news->description}}</td>
                                         <td>{{$news->author}}</td>
@@ -58,8 +65,12 @@
                                             @endforeach
                                         </td>
                                         <td>
+                                            @if(checkPer($_SESSION['user']['id'], 'post_edit'))
                                             <a class="btn btn-primary" href="/superFood/admin/news/edit/{{$news->id}}">Sửa</a>
-                                            <a class="btn btn-danger" href="/superFood/admin/news/delete/{{$news->id}}">Xóa</a>
+                                            @endif
+                                            @if(checkPer($_SESSION['user']['id'], 'post_delete'))
+                                                <a class="btn btn-danger" href="/superFood/admin/news/delete/{{$news->id}}">Xóa</a>
+                                            @endif
                                         </td>
 
                                     </tr>

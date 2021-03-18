@@ -15,7 +15,11 @@
                         <div class="col-md-4">
                             <div class="profile__left">
                                 <div class="profile-name">
-                                    <img src="" alt="" width="150" height="150">
+                                    <img src="@if($user->images)
+                                            /{{$_ENV['APP_NAME']}}/uploads/{{$user->images}}
+                                    @else
+                                            /{{$_ENV['APP_NAME'].'/backend/assets/images/userImages/defaultImage.png'}}
+                                    @endif" alt="" width="150" height="150">
                                     <h5>{{$user->lastname}} {{$user->firstname}}</h5>
                                 </div>
                                 <div class="email">
@@ -60,11 +64,15 @@
                                         <div class="avatar form-group">
                                             <p>Avatar</p>
                                             <div class="avatar_img" style="width: 60%">
-                                                <img id="profileInfo_avatar" src="" alt="" width="120" height="120">
-                                                <label class="avatarLabel" for="avatar"><i class="fas fa-pen"></i><input
-                                                            style="display: none" type="file" id="avatar"
-                                                            name="fileToUpload"></label>
-                                                <a href="" style="border: none; background: transparent" class="avatarDelete"><i class="fas fa-times"></i></a>
+                                                <img id="profileInfo_avatar" src="@if($user->images)
+                                                        /{{$_ENV['APP_NAME']}}/uploads/{{$user->images}}
+                                                @else
+                                                        /{{$_ENV['APP_NAME'].'/backend/assets/images/userImages/defaultImage.png'}}
+                                                @endif" alt="" width="120" height="120">
+                                                <label class="avatarLabel" for="avatar"><i class="fas fa-pen"></i>
+                                                    <input style="display: none" type="file" id="avatar" name="fileToUpload">
+                                                </label>
+                                                <a href="/superFood/admin/userProfile/delete/{{$user->id}}" style="border: none; background: transparent" class="avatarDelete"><i class="fas fa-times"></i></a>
                                             </div>
                                         </div>
                                         <div class="name form-group">

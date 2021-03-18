@@ -20,6 +20,10 @@
                                 <input type="text" name="newsTitleAdd" class="form-control" id="newsTitleAdd">
                             </div>
                             <div class="form-group">
+                                <label for="images">Ảnh mô tả</label>
+                                <input type="file" name="images" class="form-control" id="images">
+                            </div>
+                            <div class="form-group">
                                 <label for="newsDescAdd">Mô tả:</label>
                                 <input type="text" name="newsDescAdd" class="form-control" id="newsDescAdd">
                             </div>

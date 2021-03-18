@@ -22,6 +22,10 @@
                                        id="newsTitleUpdate">
                             </div>
                             <div class="form-group">
+                                <label for="images">Ảnh mô tả</label>
+                                <input type="file" name="images" class="form-control" id="images">
+                            </div>
+                            <div class="form-group">
                                 <label for="newsDescUpdate">Mô tả:</label>
                                 <input value="{{$news->description}}" type="text" name="newsDescUpdate"
                                        class="form-control" id="newsDescUpdate">

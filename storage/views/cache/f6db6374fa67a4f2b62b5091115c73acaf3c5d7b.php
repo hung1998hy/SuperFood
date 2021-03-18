@@ -1,4 +1,11 @@
 
+<?php if(!checkPer($_SESSION['user']['id'], 'user_view')): ?>
+    <?php
+        header("Location: /superFood/admin/dashboard/");
+        ?>
+<?php endif; ?>
+
+
 <?php $__env->startSection('title'); ?><?php echo e('Users'); ?><?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div id="layoutSidenav">
@@ -11,8 +18,10 @@
                         <li class="breadcrumb-item"><a href="/superFood/admin/dashboard/">Dashboard</a></li>
                         <li class="breadcrumb-item active">Quản lý người dùng</li>
                     </ol>
-                    <a href="/superFood/admin/users/create" class="btn btn-primary addBtn">Thêm người dùng
-                    </a>
+                    <?php if(checkPer($_SESSION['user']['id'], 'user_add')): ?>
+                        <a href="/superFood/admin/users/create" class="btn btn-primary addBtn">Thêm người dùng
+                        </a>
+                    <?php endif; ?>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table mr-1"></i>
@@ -34,7 +43,13 @@
                                     <tbody>
                                     <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td class="text-center"><img src="" alt="" width="100" height="100"></td>
+                                            <td class="text-center"><img src="<?php if($user->images): ?>
+                                                        /<?php echo e($_ENV['APP_NAME']); ?>/uploads/<?php echo e($user->images); ?>
+
+                                                <?php else: ?>
+                                                        /<?php echo e($_ENV['APP_NAME'].'/backend/assets/images/userImages/defaultImage.png'); ?>
+
+                                                <?php endif; ?>" alt="" width="100" height="100"></td>
                                             <td><?php echo e($user->firstname); ?></td>
                                             <td><?php echo e($user->lastname); ?></td>
                                             <td><?php echo e($user->email); ?></td>
@@ -47,9 +62,15 @@
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </td>
                                             <td>
-                                                <a class="btn btn-primary" href="/superFood/admin/users/edit/<?php echo e($user->id); ?>">Sửa</a>
-                                                <a class="btn btn-danger" href="/superFood/admin/users/delete/<?php echo e($user->id); ?>">Xóa</a>
-                                            </td>
+                                            <?php if(checkPer($_SESSION['user']['id'], 'user_edit')): ?>
+                                                <a class="btn btn-primary"
+                                                   href="/superFood/admin/users/edit/<?php echo e($user->id); ?>">Sửa</a>
+                                            <?php endif; ?>
+                                            <?php if(checkPer($_SESSION['user']['id'], 'user_delete')): ?>
+                                                <a class="user_delete btn btn-danger"
+                                                   href="/superFood/admin/users/delete/<?php echo e($user->id); ?>">Xóa</a>
+                                                <?php endif; ?>
+                                                </td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>

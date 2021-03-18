@@ -75,6 +75,12 @@ class AdminUserProfileController extends Controller
                 'lastname' => $lastname,
                 'email' => $email
             ]);
+            if (is_uploaded_file($_FILES['fileToUpload']['tmp_name'])) {
+                $image_src = uploadFile($_FILES['fileToUpload'], 'user');
+                $user = Users::find($id)->update([
+                    'images' => $image_src
+                ]);
+            }
             if ($user) {
                 header('Location: /superFood/admin/userProfile/edit/' . $id);
             } else {
@@ -99,6 +105,9 @@ class AdminUserProfileController extends Controller
      */
     public function delete($id)
     {
-
+        Users::find($id['id'])->update([
+           'images' => ''
+        ]);
+        header("Location:/superFood/admin/userProfile/edit/".$id['id']);
     }
 }

@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Đăng nhập - SuperFood Admin</title>
+    <title>SuperFood| Login</title>
     <link href="<?php echo e(BASE_URL.'core/assets/css/core.css'); ?>" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
             crossorigin="anonymous"></script>
@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="/superFood/auth/register">Quên mật khẩu?</a>
+                                        <a class="small" href="/superFood/admin/forgotPassword/create">Quên mật khẩu?</a>
                                         <button name="login" class="btn btn-primary">Đăng nhập</button>
                                     </div>
                                 </form>

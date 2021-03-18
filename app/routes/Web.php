@@ -47,6 +47,8 @@ $router->map('GET','/superFood/admin/roles/delete/[i:id]','App\Controllers\Admin
 
 $router->map('GET','/superFood/admin/userProfile/edit/[i:id]','App\Controllers\AdminUserProfileController@edit','editUserProfile');
 $router->map('POST','/superFood/admin/userProfile/update/[i:id]','App\Controllers\AdminUserProfileController@update','updateUserProfile');
+$router->map('GET','/superFood/admin/userProfile/delete/[i:id]','App\Controllers\AdminUserProfileController@delete','deleteUserProfile');
+
 
 $router->map('GET','/superFood/admin/userProfile/passEdit/[i:id]','App\Controllers\AdminPasswordController@edit','editUserPass');
 $router->map('POST','/superFood/admin/userProfile/passUpdate/[i:id]','App\Controllers\AdminPasswordController@update','updateUserPass');
@@ -56,6 +58,11 @@ $router->map('POST','/superFood/admin/forgotPassword/store','App\Controllers\Adm
 
 $router->map('GET','/superFood/admin/resetPassword/create','App\Controllers\AdminResetPasswordController@create','createResetPass');
 $router->map('POST','/superFood/admin/resetPassword/store','App\Controllers\AdminResetPasswordController@store','storeResetPass');
+
+
+//Active mail
+$router->map('GET','/superFood/admin/activeAccount/update/[i:id]','App\Controllers\ActiveAccountController@update','activeAccount');
+
 
 
 
